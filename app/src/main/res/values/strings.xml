@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">EasyShop</string>
+    <string name="saludo_inicio">Bienvenidos</string>
+    <string name="descripcion_prelog">Dónde comprar es muy fácil</string>
+    <string name="iniciar_sesi_n_como">Iniciar sesión como:</string>
+    <string name="usuario">Usuario</string>
+    <string name="administrador">Administrador</string>
+    <string name="iniciar_con_google">Iniciar con Google</string>
+    <string name="iniciar_con_facebook">Iniciar con Facebook</string>
+    <string name="opciones_ingreso">También puedes iniciar sesión con:</string>
+    <string name="enviar_c_digo">Enviar código</string>
+    <string name="instruccion_codigo">Ingrese el código recibido</string>
+    <string name="instruccion_movil">Ingrese su número móvil</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="logotransimg">logotransimg</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="ingresar_num">Ingrese su número</string>
+    <string name="validandoNum">Validando número</string>
+    <string name="esperaraVali_num">Espere mientras se valida su número.</string>
+    <string name="admin">Admin</string>
+    <string name="user">User</string>
+
+
+</resources>

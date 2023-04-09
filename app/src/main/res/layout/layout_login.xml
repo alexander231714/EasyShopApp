@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".Login">
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/secundario"
+            android:textSize="40sp"
+            android:padding="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+            android:text="@string/iniciar_sesi_n"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="162dp"
+            android:src="@drawable/user" />
+
+        <EditText
+            android:id="@+id/txtIngresarNum"
+            android:layout_width="330dp"
+            android:layout_gravity="center"
+            android:layout_height="48dp"
+            android:textColor="@color/secundario"
+            android:gravity="center"
+            android:hint="@string/instruccion_movil"
+            android:inputType="phone"/>
+        <EditText
+            android:id="@+id/txtCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:textColor="@color/secundario"
+            android:gravity="center"
+            android:hint="@string/instruccion_codigo"
+            android:inputType="number"
+            android:visibility="gone"
+            />
+
+
+        <Button
+            android:id="@+id/btnenviarnumero"
+            android:layout_gravity="center"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/primario"
+            android:textColor="@color/secundario"
+            android:text="@string/enviar_c_digo"
+            />
+        <Button
+            android:id="@+id/btnenviarCodigo"
+            android:layout_gravity="center"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/primario"
+            android:textColor="@color/secundario"
+            android:text="@string/confirmar"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/opciones_ingreso"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btnFacebook"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:backgroundTint="#3F51B5"
+            android:text="@string/iniciar_con_facebook"
+            />
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btnGoogle"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:backgroundTint="#FB5447"
+            android:text="@string/iniciar_con_google"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:gravity="right"
+            android:padding="20dp"
+            android:text="@string/user"
+            android:textColor="@color/secundario"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
