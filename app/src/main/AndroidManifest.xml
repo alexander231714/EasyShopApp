@@ -12,8 +12,15 @@
         android:theme="@style/Theme.EasyShop"
         tools:targetApi="31">
         <activity
-            android:name=".Principal"
+            android:name=".ConfirmarCompra"
             android:exported="false" />
+        <activity
+            android:name=".Carrito"
+            android:exported="false" />
+        <activity
+            android:name=".Principal"
+            android:exported="false"
+            android:theme="@style/Theme.EasyShop.NoActionBar" />
         <activity
             android:name=".Login_admin"
             android:exported="false" />

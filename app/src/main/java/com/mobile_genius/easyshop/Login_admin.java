@@ -150,6 +150,7 @@ public class Login_admin extends AppCompatActivity {
     private void EnviarlaPrincipal() {
         Intent intent = new Intent(Login_admin.this, Principal.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("papel","admin" );
         intent.putExtra("phone", phoneNumber);
         startActivity(intent);
         finish();
