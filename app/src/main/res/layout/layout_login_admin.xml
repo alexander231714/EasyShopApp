@@ -29,7 +29,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="162dp"
-            android:src="@drawable/user_admin" />
+            android:src="@drawable/user_admin"
+            android:contentDescription="@string/imagen_login_admin"
+            />
 
         <EditText
             android:id="@+id/txtIngresarNumAdmin"
@@ -39,7 +41,9 @@
             android:textColor="@color/secundario"
             android:gravity="center"
             android:hint="@string/instruccion_movil"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:autofillHints="false"
+            />
         <EditText
             android:id="@+id/txtCodigoAdmin"
             android:layout_width="match_parent"
@@ -50,6 +54,7 @@
             android:hint="@string/instruccion_codigo"
             android:inputType="number"
             android:visibility="gone"
+            android:autofillHints="false"
             />
 
 

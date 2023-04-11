@@ -19,6 +19,15 @@
     <string name="esperaraVali_num">Espere mientras se valida su número.</string>
     <string name="admin">Admin</string>
     <string name="user">User</string>
+    <string name="complete_sus_datos">COMPLETE SUS DATOS</string>
+    <string name="imagen_setup">imagen setup</string>
+    <string name="continuar">Continuar</string>
+    <string name="ingrese_su_ciudad">Ingrese su ciudad</string>
+    <string name="ingrese_su_tel_fono">Ingrese su teléfono</string>
+    <string name="ingrese_su_direcci_n">Ingrese su dirección</string>
+    <string name="ingrese_su_nombre">Ingrese su nombre</string>
+    <string name="imagen_login_usuario">imagen login usuario</string>
+    <string name="imagen_login_admin">imagen login admin</string>
 
 
 </resources>
