@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +17,14 @@
         android:padding="18sp"
         android:textStyle="bold|italic"
         />
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/setup_imagen"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/usuario_setup"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        app:civ_border_color="@color/black"
         android:contentDescription="@string/imagen_setup"
         />
     <EditText
