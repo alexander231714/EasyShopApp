@@ -153,7 +153,6 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(Login.this, Principal.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("phone", phoneNumber);
-        intent.putExtra("papel","usuario");
         startActivity(intent);
         finish();
     }

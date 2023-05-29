@@ -14,10 +14,6 @@
         android:icon="@drawable/categoria"
         android:title="Categoria"/>
 
-    <item
-        android:id="@+id/nvinventario"
-        android:icon="@drawable/inventario"
-        android:title="Inventario"/>
 
     <item
         android:id="@+id/busqueda"

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Setup">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,7 @@
         android:textStyle="bold|italic"
         />
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/setup_imagen"
+        android:id="@+id/asetup_imagen"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/usuario_setup"
@@ -28,7 +29,7 @@
         android:contentDescription="@string/imagen_setup"
         />
     <EditText
-        android:id="@+id/txt_setup_nombre"
+        android:id="@+id/atxt_setup_nombre"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -40,7 +41,7 @@
         android:autofillHints="false"
         />
     <EditText
-        android:id="@+id/txt_setup_direccion"
+        android:id="@+id/atxt_setup_direccion"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -53,7 +54,7 @@
         android:autofillHints="false"
         />
     <EditText
-        android:id="@+id/txt_setup_telefono"
+        android:id="@+id/atxt_setup_telefono"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -65,7 +66,7 @@
         android:autofillHints="false"
         />
     <EditText
-        android:id="@+id/txt_setup_ciudad"
+        android:id="@+id/atxt_setup_ciudad"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -78,7 +79,7 @@
         android:autofillHints="false"
         />
     <Button
-        android:id="@+id/btn_setup"
+        android:id="@+id/abtn_setup"
         android:layout_gravity="center"
         android:layout_width="320dp"
         android:layout_height="wrap_content"

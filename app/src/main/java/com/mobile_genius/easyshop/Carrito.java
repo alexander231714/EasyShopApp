@@ -21,7 +21,7 @@ private double precTot = 0.0 ;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrito);
 
-recyclerView=(RecyclerView)findViewById(R.id.list);
+        recyclerView=(RecyclerView)findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
         lytmang= new LinearLayoutManager(this);
         recyclerView.setLayoutManager(lytmang);
