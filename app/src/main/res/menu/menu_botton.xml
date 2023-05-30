@@ -5,6 +5,12 @@
         android:id="@+id/fragmentUno"
         android:title="Inicio"
         android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/fragmentProd"
+        android:title="Productos"
+        android:icon="@drawable/ic_lista"/>
+
     <item
         android:id="@+id/fragmentCuatro"
         android:title="Ordenes"

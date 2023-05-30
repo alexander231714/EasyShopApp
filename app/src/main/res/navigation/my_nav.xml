@@ -25,4 +25,10 @@
         android:name="com.mobile_genius.easyshop.FragmentCuatro"
         android:label="fragment_cuatro"
         tools:layout="@layout/fragment_cuatro" />
+
+    <fragment
+        android:id="@+id/fragmentProd"
+        android:name="com.mobile_genius.easyshop.ProductosFragment"
+        android:label="fragment_productos"
+        tools:layout="@layout/fragment_productos" />
 </navigation>

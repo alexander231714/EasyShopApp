@@ -33,7 +33,8 @@ import java.util.HashMap;
 
 public class AgregarproductoActivity extends AppCompatActivity {
     private ImageView imagenpro;
-    private EditText nombrepro, descripcionpro,preciopro;
+    private EditText nombrepro, descripcionpro,preciocomprapro,precioventapro,cantidadpro;
+    private TextView textox;
     private Button agregarpro;
     private static final int Gallery_Pick = 1;
     private Uri imagenUri;
@@ -41,7 +42,7 @@ public class AgregarproductoActivity extends AppCompatActivity {
     private StorageReference ProductoImagenRef;
     private DatabaseReference ProductoRef;
     private ProgressDialog dialog;
-    private String Categoria, Nom, Desc, Pre,CurrentDate, CurrentTime;
+    private String Categoria, Nom, Desc, PreCom,PreVen,Cant,CurrentDate, CurrentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +55,13 @@ public class AgregarproductoActivity extends AppCompatActivity {
 
         Toast.makeText(this, Categoria, Toast.LENGTH_SHORT).show();
 
-
+        textox = (TextView) findViewById(R.id.textox);
         imagenpro = (ImageView) findViewById(R.id.imagenpro);
         nombrepro = (EditText) findViewById(R.id.nombrepro);
         descripcionpro = (EditText) findViewById(R.id.descripcionpro);
-        preciopro = (EditText) findViewById(R.id.preciopro);
+        preciocomprapro = (EditText) findViewById(R.id.preciocomprapro);
+        precioventapro = (EditText) findViewById(R.id.precioventapro);
+        cantidadpro = (EditText) findViewById(R.id.cantidadpro);
         agregarpro = (Button) findViewById(R.id.agregarpro);
 
         dialog = new ProgressDialog(this);
@@ -75,6 +78,7 @@ public class AgregarproductoActivity extends AppCompatActivity {
                 ValidarProducto();
             }
         });
+        textox.setText(Categoria+"\n Agregar Producto");
     }
 
 
@@ -97,15 +101,22 @@ public class AgregarproductoActivity extends AppCompatActivity {
     private void ValidarProducto() {
         Nom = nombrepro.getText().toString();
         Desc = descripcionpro.getText().toString();
-        Pre = preciopro.getText().toString();
+        PreCom = preciocomprapro.getText().toString();
+        PreVen = precioventapro.getText().toString();
+        Cant = cantidadpro.getText().toString();
+
         if (imagenUri ==null){
             Toast.makeText(this, "Primero agregar una imagen", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(Nom)){
             Toast.makeText(this, "Debes ingresar el nombre del producto", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(Desc)){
             Toast.makeText(this, "Debes ingresar la descripcion del producto", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(Pre)){
-            Toast.makeText(this, "Debes ingresar el precio del producto", Toast.LENGTH_SHORT).show();
+        }else if(TextUtils.isEmpty(PreCom)){
+            Toast.makeText(this, "Debes ingresar el precio de compra del producto", Toast.LENGTH_SHORT).show();
+        }else if(TextUtils.isEmpty(PreVen)){
+            Toast.makeText(this, "Debes ingresar el precio de venta del producto", Toast.LENGTH_SHORT).show();
+        }else if(TextUtils.isEmpty(Cant)){
+            Toast.makeText(this, "Debes ingresar la cantidad de productos", Toast.LENGTH_SHORT).show();
         }else {
             GuardarInformacionProducto();
         }
@@ -176,7 +187,9 @@ public class AgregarproductoActivity extends AppCompatActivity {
         map.put("hora",CurrentTime);
         map.put("descripcion",Desc);
         map.put("nombre",Nom);
-        map.put("Precio",Pre);
+        map.put("Preciocom",PreCom);
+        map.put("Precioven",PreVen);
+        map.put("Cant",Cant);
         map.put("imagen",downloadUri);
         map.put("categoria",Categoria);
 
@@ -184,7 +197,7 @@ public class AgregarproductoActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    Intent intent = new Intent(AgregarproductoActivity.this,FragmentUno.class);
+                    Intent intent = new Intent(AgregarproductoActivity.this,AdminActivity.class);
                     startActivity(intent);
                     dialog.dismiss();
                     Toast.makeText(AgregarproductoActivity.this, "Solicitud Exitosa", Toast.LENGTH_SHORT).show();

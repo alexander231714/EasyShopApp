@@ -60,6 +60,9 @@ public class AdminActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.fragmentCuatro){
                 Fragmentos(new FragmentCuatro());
             }
+            if (item.getItemId() == R.id.fragmentProd){
+                Fragmentos(new ProductosFragment());
+            }
             return true;
         }
     };
