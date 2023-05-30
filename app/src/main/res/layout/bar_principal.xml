@@ -15,9 +15,8 @@
         android:layout_height="?actionBarSize"
         android:background="@color/teal_700"
         android:popupTheme="@style/AppTheme.PopupOverlay"
-        tools:targetApi="M"/>
+        tools:targetApi="lollipop"/>
     </com.google.android.material.appbar.AppBarLayout>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/flot"
         android:layout_width="wrap_content"
@@ -26,8 +25,5 @@
         android:layout_margin="15dp"
         android:backgroundTint="@color/secundario"
         android:src="@drawable/carrito" />
-
-    <include
-        layout="@layout/contenido_principal"
-        />
+    <include layout="@layout/contenido_principal" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -99,7 +99,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void EnviarAlSetup() {
-        Intent intent = new Intent(AdminActivity.this, Setup.class);
+        Intent intent = new Intent(AdminActivity.this, SetupadminActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("phone", Telefono);
         startActivity(intent);

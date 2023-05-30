@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentTres"
+    tools:context=".PerfilActivity"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +19,7 @@
         android:textStyle="bold|italic"
         />
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/perfila_imagen"
+        android:id="@+id/perfil_imagen"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/usuario_setup"
@@ -28,7 +29,7 @@
         android:contentDescription="@string/imagen_setup"
         />
     <EditText
-        android:id="@+id/txt_perfila_nombre"
+        android:id="@+id/txt_perfil_nombre"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -40,7 +41,7 @@
         android:autofillHints="false"
         />
     <EditText
-        android:id="@+id/txt_perfila_direccion"
+        android:id="@+id/txt_perfil_direccion"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -53,7 +54,7 @@
         android:autofillHints="false"
         />
     <EditText
-        android:id="@+id/txt_perfila_telefono"
+        android:id="@+id/txt_perfil_telefono"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -65,7 +66,7 @@
         android:autofillHints="false"
         />
     <EditText
-        android:id="@+id/txt_perfila_ciudad"
+        android:id="@+id/txt_perfil_ciudad"
         android:layout_gravity="center"
         android:layout_width="330dp"
         android:layout_height="48dp"
@@ -78,7 +79,7 @@
         android:autofillHints="false"
         />
     <Button
-        android:id="@+id/btn_perfila"
+        android:id="@+id/btn_perfil"
         android:layout_gravity="center"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
@@ -88,4 +89,5 @@
         android:textSize="18sp"
         android:text="GUARDAR INFORMACION"
         />
+
 </LinearLayout>

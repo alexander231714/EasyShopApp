@@ -1,20 +1,15 @@
 package com.mobile_genius.easyshop;
 
-import static android.app.Activity.RESULT_OK;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,10 +35,8 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+public class PerfilActivity extends AppCompatActivity {
 
-public class FragmentTres extends Fragment {
-
-    private View fragmento;
     private EditText nombre, direccion, telefono, ciudad;
     private Button guardar;
     private CircleImageView imagen;
@@ -54,27 +47,23 @@ public class FragmentTres extends Fragment {
     private static int Galery_Pick = 1;
     private StorageReference UserImagenPerfil;
 
-    public FragmentTres() {
-
-    }
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        fragmento = inflater.inflate(R.layout.fragment_tres, container, false);
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_perfil);
         auth = FirebaseAuth.getInstance();
         CurrentUserId = auth.getCurrentUser().getUid();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Admin");
-        dialog = new ProgressDialog(getContext());
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        dialog = new ProgressDialog(this);
         UserImagenPerfil = FirebaseStorage.getInstance().getReference().child("Perfil");
-        nombre = (EditText) fragmento.findViewById(R.id.txt_perfila_nombre);
-        direccion = (EditText) fragmento.findViewById(R.id.txt_perfila_direccion);
-        telefono = (EditText) fragmento.findViewById(R.id.txt_perfila_telefono);
-        ciudad = (EditText) fragmento.findViewById(R.id.txt_perfila_ciudad);
-        guardar = (Button) fragmento.findViewById(R.id.btn_perfila);
-        imagen = (CircleImageView) fragmento.findViewById(R.id.perfila_imagen);
+
+        nombre = (EditText) findViewById(R.id.txt_perfil_nombre);
+        direccion = (EditText) findViewById(R.id.txt_perfil_direccion);
+        telefono = (EditText) findViewById(R.id.txt_perfil_telefono);
+        ciudad = (EditText) findViewById(R.id.txt_perfil_ciudad);
+        guardar = (Button) findViewById(R.id.btn_perfil);
+        imagen = (CircleImageView) findViewById(R.id.perfil_imagen);
 
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -135,7 +124,7 @@ public class FragmentTres extends Fragment {
                         String imagestr = snapshot.child("imagen").getValue().toString();
                         Picasso.get().load(imagestr).placeholder(R.drawable.logo_transparent).into(imagen);
                     }else{
-                        Toast.makeText(getContext(), "Por favor seleccione una imagen de perfil....", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PerfilActivity.this, "Por favor seleccione una imagen de perfil....", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -143,11 +132,13 @@ public class FragmentTres extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        return fragmento;
-    }
+
+
+    }//Oncreate********
+
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == Galery_Pick && resultCode == RESULT_OK && data != null) {
@@ -155,7 +146,7 @@ public class FragmentTres extends Fragment {
 
             //Para recortar imagen
             CropImage.activity(imageUri).setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1).start(getActivity());
+                    .setAspectRatio(1,1).start(this);
         }
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -186,7 +177,7 @@ public class FragmentTres extends Fragment {
                                                 dialog.dismiss();
                                             } else {
                                                 String mensaje = task.getException().getMessage();
-                                                Toast.makeText(getContext(), "Error: " + mensaje, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(PerfilActivity.this, "Error: " + mensaje, Toast.LENGTH_SHORT).show();
                                                 dialog.dismiss();
                                             }
                                         }
@@ -197,7 +188,7 @@ public class FragmentTres extends Fragment {
                     }
                 });
             } else {
-                Toast.makeText(getContext(), "Imagen no soportada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Imagen no soportada", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         }
@@ -210,13 +201,13 @@ public class FragmentTres extends Fragment {
         String phones = telefono.getText().toString();
 
         if (TextUtils.isEmpty(nombres)){
-            Toast.makeText(getContext(), "Ingrese el nombre", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese el nombre", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(direcciones)){
-            Toast.makeText(getContext(), "Ingrese la direccion", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese la direccion", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(ciudades)){
-            Toast.makeText(getContext(), "Ingrese la ciudad", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese la ciudad", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(phones)){
-            Toast.makeText(getContext(), "Ingrese su telefono", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ingrese su telefono", Toast.LENGTH_SHORT).show();
         }else{
             dialog.setTitle("Guardando");
             dialog.setMessage("Por favor espere...");
@@ -238,7 +229,7 @@ public class FragmentTres extends Fragment {
                         dialog.dismiss();
                     }else{
                         String mensaje = task.getException().toString();
-                        Toast.makeText(getContext(), "Error: "+mensaje, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PerfilActivity.this, "Error: "+mensaje, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -246,8 +237,9 @@ public class FragmentTres extends Fragment {
     }
 
     private void EnviarAlInicio() {
-        Intent intent = new Intent(getContext(), AdminActivity.class);
+        Intent intent = new Intent(PerfilActivity.this, Principal.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 }
