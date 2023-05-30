@@ -1,4 +1,5 @@
 package com.mobile_genius.easyshop;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -44,11 +45,99 @@ public class FragmentUno extends Fragment {
         camisas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "camisetas");
+                startActivity(intent);
             }
         });
-
-
+        deporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "deporte");
+                startActivity(intent);
+            }
+        });
+        joyas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "joyas");
+                startActivity(intent);
+            }
+        });
+        audifonos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "audifonos");
+                startActivity(intent);
+            }
+        });
+        computadora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "computadora");
+                startActivity(intent);
+            }
+        });
+        juegos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "juegos");
+                startActivity(intent);
+            }
+        });
+        libros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "libros");
+                startActivity(intent);
+            }
+        });
+        televisiones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "televisiones");
+                startActivity(intent);
+            }
+        });
+        musica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "musica");
+                startActivity(intent);
+            }
+        });
+        licores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "licores");
+                startActivity(intent);
+            }
+        });
+        camaras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "camaras");
+                startActivity(intent);
+            }
+        });
+        lentes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AgregarproductoActivity.class);
+                intent.putExtra("categoria", "lentes");
+                startActivity(intent);
+            }
+        });
         return fragmento;
     }
 }
