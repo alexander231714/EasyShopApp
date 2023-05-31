@@ -5,15 +5,23 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,16 +30,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mobile_genius.easyshop.modal.Productos;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.internal.cache.DiskLruCache;
 
 
 public class Principal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth auth;
     private String CurrentUserId;
-    private DatabaseReference UserRef;
+    private DatabaseReference UserRef,ProductosRef;
     private String Telefono = "";
+
+    private FloatingActionButton botonFlotante;
+    private RecyclerView  recyclermenu;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +61,24 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         auth = FirebaseAuth.getInstance();
         CurrentUserId = auth.getCurrentUser().getUid();
 
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Usurios");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        ProductosRef = FirebaseDatabase.getInstance().getReference().child("Productos");
+        recyclermenu = findViewById(R.id.recicle);
+        recyclermenu.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclermenu.setLayoutManager(layoutManager);
+        botonFlotante = (FloatingActionButton)findViewById(R.id.flot);
+        botonFlotante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Principal.this,Carrito.class);
+                startActivity(intent);
+            }
+        });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("EasyShop");
+        setActionBar(toolbar);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,6 +93,24 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
 
         TextView nombreHeader = (TextView) headerView.findViewById(R.id.nombreUsuario);
         CircleImageView imagenHeader = (CircleImageView) headerView.findViewById(R.id.usuario);
+
+        UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists() || snapshot.hasChild("imagen")){
+                    String imagen = snapshot.child("imagen").getValue().toString();
+                    nombreHeader.setText(snapshot.child("nombre").getValue().toString());
+                    Picasso.get().load(imagen).error(R.drawable.home).into(imagenHeader);
+                }else if(snapshot.exists()){
+                    nombreHeader.setText(snapshot.child("nombre").getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
@@ -73,6 +123,40 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         }else{
             VerificarUsuarioExistente();
         }
+
+        FirebaseRecyclerOptions<Productos> options = new FirebaseRecyclerOptions
+                .Builder<Productos>().setQuery(ProductosRef,Productos.class).build();
+
+        FirebaseRecyclerAdapter<Productos,ProductoViewHolder> adapter = new FirebaseRecyclerAdapter<Productos, ProductoViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull ProductoViewHolder holder, int position, @NonNull Productos model) {
+              holder.productoNom.setText(model.getNombre().toUpperCase());
+              holder.productoCantidad.setText("CANTIDAD :"+model.getCantidad());
+              holder.productoDesc.setText(model.getDescripcion());
+              holder.productoPrecio.setText("$ :"+model.getPrecioven());
+                Picasso.get().load(model.getImagen()).into(holder.prodImg);
+
+                holder.prodImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Principal.this, Carrito.class);
+                        intent.putExtra("pid",model.getPid());
+                        startActivity(intent);
+                    }
+                });
+
+            }
+
+            @NonNull
+            @Override
+            public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                View view =LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.inventario_item,viewGroup, false);
+                ProductoViewHolder holder = new ProductoViewHolder(view);
+                return holder;
+            }
+        };
+     recyclermenu.setAdapter(adapter);
+     adapter.startListening();
     }
 
     @Override

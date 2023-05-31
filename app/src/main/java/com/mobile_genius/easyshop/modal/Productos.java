@@ -2,9 +2,12 @@ package com.mobile_genius.easyshop.modal;
 
 public class Productos {
 
-    private String nombre,descripcion,precioven,imagen,categoria,pid,fecha,hora;
-public Productos(){}
-    public Productos(String nombre, String descripcion, String precioven, String imagen, String categoria, String pid, String fecha, String hora) {
+    private String nombre, descripcion, precioven, imagen, categoria, pid, fecha, hora, cantidad,preciocomp;
+
+    public Productos() {
+    }
+
+    public Productos(String nombre, String descripcion, String precioven, String imagen, String categoria, String pid, String fecha, String hora, String cantidad, String preciocomp) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioven = precioven;
@@ -13,6 +16,8 @@ public Productos(){}
         this.pid = pid;
         this.fecha = fecha;
         this.hora = hora;
+        this.cantidad = cantidad;
+        this.preciocomp = preciocomp;
     }
 
     public String getNombre() {
@@ -77,5 +82,21 @@ public Productos(){}
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getPreciocomp() {
+        return preciocomp;
+    }
+
+    public void setPreciocomp(String preciocomp) {
+        this.preciocomp = preciocomp;
     }
 }
