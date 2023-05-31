@@ -21,8 +21,11 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mobile_genius.easyshop.modal.Carrito;
 
 public class CarritoActivity extends AppCompatActivity {
@@ -133,5 +136,35 @@ private FirebaseAuth auth;
     }
 
     private void VerificarEstadOrden() {
+        DatabaseReference orderRef;
+        orderRef = FirebaseDatabase.getInstance().getReference().child("Ordenes").child(CurrentUserId);
+
+        orderRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    String estado = snapshot.child("estado").getValue().toString();
+                    String nombre = snapshot.child("nombre").getValue().toString();
+                    if (estado.equals("Enviado")){
+                        total.setText("Estimado"+nombre+"Su pedido fue enviado");
+                        recyclerView.setVisibility(View.GONE);
+                        mnsj.setText("Su pedido se enviara pronto");
+                        mnsj.setVisibility(View.VISIBLE);
+                        btnsig.setVisibility(View.GONE);
+                    }else if (estado.equals("No Enviado")){
+                        total.setText("Su orden esta siendo procesada..");
+                        recyclerView.setVisibility(View.GONE);
+                        mnsj.setVisibility(View.VISIBLE);
+                        btnsig.setVisibility(View.GONE);
+                        Toast.makeText(CarritoActivity.this, "Puedes comprar mas productos cuando el anterior finalice", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

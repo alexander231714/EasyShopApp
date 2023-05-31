@@ -10,16 +10,16 @@
         android:id="@+id/stl1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/teal_200"
+        android:background="@color/primario"
         android:layout_alignParentTop="true"
         >
         <TextView
             android:id="@+id/precitot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TOTAL :"
+            android:text="TOTAL: 000"
             android:textAlignment="center"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/black"
             android:textSize="25dp"
             android:layout_marginTop="7dp"
             />
@@ -56,7 +56,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:text="SIGUIENTE"
-        android:textColor="@color/teal_200"
+        android:textColor="@color/black"
         android:backgroundTint="@color/primario"/>
 
 

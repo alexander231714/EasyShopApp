@@ -1,64 +1,83 @@
 package com.mobile_genius.easyshop;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentCuatro#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.mobile_genius.easyshop.Clases.Ordenes;
+
 public class FragmentCuatro extends Fragment {
+    private View Vista;
+    private RecyclerView recicler;
+    private DatabaseReference OrdenRef;
+    public FragmentCuatro() { }
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FragmentCuatro() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentCuatro.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentCuatro newInstance(String param1, String param2) {
-        FragmentCuatro fragment = new FragmentCuatro();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Vista = inflater.inflate(R.layout.fragment_cuatro, container, false);
+        OrdenRef = FirebaseDatabase.getInstance().getReference().child("Ordenes");
+        recicler = (RecyclerView) Vista.findViewById(R.id.recicler_ordenes);
+        recicler.setLayoutManager(new LinearLayoutManager(getContext()));
+        return Vista;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onStart() {
+        super.onStart();
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Ordenes>().setQuery(OrdenRef,Ordenes.class).build();
+
+        FirebaseRecyclerAdapter<Ordenes,OrdenesViewHolder>adapter = new FirebaseRecyclerAdapter<Ordenes, OrdenesViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull OrdenesViewHolder holder, int position, @NonNull Ordenes model) {
+              holder.nombre.setText("Cliente: "+model.getNombre());
+              holder.numero.setText(model.getTelefono());
+              holder.precio.setText("Total: $" +model.getTotal());
+              holder.correo.setText("Correo: "+model.getCorreo()+"Dir:"+model.getDireccion());
+              holder.fecha.setText("Fecha:" +model.getFecha()+" "+model.getHora());
+              holder.boton.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      Toast.makeText(getContext(), "CORRECTO", Toast.LENGTH_SHORT).show();
+                  }
+              });
+            }
+            @NonNull
+            @Override
+            public OrdenesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ordenes_layout,parent,false);
+                OrdenesViewHolder viewHolder = new OrdenesViewHolder(view);
+                return viewHolder;
+            }
+        };
+        recicler.setAdapter(adapter);
+        adapter.startListening();
+    }
+    public static class OrdenesViewHolder extends RecyclerView.ViewHolder{
+        TextView nombre, numero, precio, correo,fecha;
+        Button boton;
+        public OrdenesViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nombre=itemView.findViewById(R.id.ordenname);
+            numero=itemView.findViewById(R.id.ordenphone);
+            precio=itemView.findViewById(R.id.ordenprecio);
+            correo=itemView.findViewById(R.id.ordencorreodir);
+            fecha=itemView.findViewById(R.id.ordenfecha);
+            boton=itemView.findViewById(R.id.verproductosorden);
+
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cuatro, container, false);
     }
 }
