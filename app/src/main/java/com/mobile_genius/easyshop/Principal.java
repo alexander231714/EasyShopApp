@@ -1,5 +1,6 @@
 package com.mobile_genius.easyshop;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -139,9 +140,11 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 protected void onBindViewHolder(@NonNull ProductoViewHolder holder, int position, @NonNull Productos model) {
                     // Resto del código para vincular los datos con los elementos de la vista
                     holder.productoNom.setText(model.getNombre().toUpperCase());
-                    holder.productoCantidad.setText("CANTIDAD :"+model.getCantidad());
+                    //Arreglar
+                    holder.productoCantidad.setText(model.getCantidad());
                     holder.productoDesc.setText(model.getDescripcion());
-                    holder.productoPrecio.setText("$ :"+model.getPrecioven());
+                    //Arreglar
+                    holder.productoPrecio.setText(model.getPrecioven());
                     Picasso.get().load(model.getImagen()).into(holder.prodImg);
 
                     holder.prodImg.setOnClickListener(new View.OnClickListener() {

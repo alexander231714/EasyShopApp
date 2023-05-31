@@ -6,11 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -69,7 +68,7 @@ public class FragmentTres extends Fragment {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Admin");
         dialog = new ProgressDialog(getContext());
         UserImagenPerfil = FirebaseStorage.getInstance().getReference().child("Perfil");
-        nombre = (EditText) fragmento.findViewById(R.id.txt_perfila_nombre);
+        nombre =(EditText)fragmento.findViewById(R.id.txt_perfila_nombre);
         direccion = (EditText) fragmento.findViewById(R.id.txt_perfila_direccion);
         telefono = (EditText) fragmento.findViewById(R.id.txt_perfila_telefono);
         ciudad = (EditText) fragmento.findViewById(R.id.txt_perfila_ciudad);

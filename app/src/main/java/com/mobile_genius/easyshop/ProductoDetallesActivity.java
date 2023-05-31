@@ -86,10 +86,10 @@ public class ProductoDetallesActivity extends AppCompatActivity {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("pid",productoID);
         map.put("nombre",productoNombre.getText().toString());
-        map.put("precio",productoPrecio.getText().toString());
+        map.put("Precioven",productoPrecio.getText().toString());
         map.put("fecha",CurrentDate);
         map.put("hora",CurrentTime);
-        map.put("cantidad",numberButton.getNumber());
+        map.put("Cant",numberButton.getNumber());
         map.put("descripcion","");
 
         CartListRef.child("Usuario Compra").child(CurrentUserID).child("Productos").child(productoID).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
