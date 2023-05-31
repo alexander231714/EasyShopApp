@@ -4,6 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfirmarCompra">
+    tools:context=".ConfirmarCompra"
+    android:background="@color/primario">
+
+    <TextView
+        android:id="@+id/text23"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:text="Porfavor confirme su compra"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24dp" />
+
+    <EditText
+        android:id="@+id/finalnomb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text23"
+        android:hint="Nombre :"
+        android:padding="10dp"
+        android:background="@color/white"/>
+
+    <EditText
+        android:id="@+id/finalcorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/finalnomb"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="5dp"
+        android:hint="Correo :"
+        android:padding="10dp"
+        android:background="@color/white"/>
+
+    <EditText
+        android:id="@+id/finaldireccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/finalcorreo"
+        android:layout_marginTop="5dp"
+        android:hint="Direccion :"
+        android:padding="10dp"
+        android:background="@color/white"/>
+
+    <ImageView
+        android:id="@+id/imaglo"
+        android:layout_width="277dp"
+        android:layout_height="264dp"
+        android:layout_below="@+id/finaltelefono"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="35dp"
+        android:src="@drawable/logo_transparent" />
+
+    <EditText
+        android:id="@+id/finaltelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/finaldireccion"
+        android:layout_marginTop="5dp"
+        android:hint="Telefono :"
+        android:inputType="phone"
+        android:padding="10dp"
+        android:background="@color/white"/>
+
+    <Button
+        android:id="@+id/btnconfirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imaglo"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="35dp"
+        android:background="@color/secundario"
+        android:hint="CONFIRMAR"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
 
 </RelativeLayout>
