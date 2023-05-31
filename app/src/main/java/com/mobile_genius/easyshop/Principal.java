@@ -97,14 +97,20 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists() || snapshot.hasChild("imagen")){
-                    String imagen = snapshot.child("imagen").getValue().toString();
-                    nombreHeader.setText(snapshot.child("nombre").getValue().toString());
-                    Picasso.get().load(imagen).error(R.drawable.home).into(imagenHeader);
-                }else if(snapshot.exists()){
-                    nombreHeader.setText(snapshot.child("nombre").getValue().toString());
+                if (snapshot.exists() && snapshot.hasChild("imagen")) {
+                    String imagen = snapshot.child("imagen").getValue(String.class);
+                    if (imagen != null) {
+                        nombreHeader.setText(snapshot.child("nombre").getValue(String.class));
+                        Picasso.get().load(imagen).error(R.drawable.home).into(imagenHeader);
+                    } else {
+                        // Lógica de manejo cuando la imagen es nula
+                        Toast.makeText(Principal.this, "No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (snapshot.exists()) {
+                    nombreHeader.setText(snapshot.child("nombre").getValue(String.class));
                 }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -118,46 +124,49 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
     protected void onStart() {
         super.onStart();
         FirebaseUser firebaseUser = auth.getCurrentUser();
-        if (firebaseUser == null){
+        if (firebaseUser == null) {
             EnviarAlLogin();
-        }else{
+        } else {
+            CurrentUserId = firebaseUser.getUid();
             VerificarUsuarioExistente();
+
+            FirebaseRecyclerOptions<Productos> options = new FirebaseRecyclerOptions.Builder<Productos>()
+                    .setQuery(ProductosRef, Productos.class)
+                    .build();
+
+            FirebaseRecyclerAdapter<Productos, ProductoViewHolder> adapter = new FirebaseRecyclerAdapter<Productos, ProductoViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull ProductoViewHolder holder, int position, @NonNull Productos model) {
+                    // Resto del código para vincular los datos con los elementos de la vista
+                    holder.productoNom.setText(model.getNombre().toUpperCase());
+                    holder.productoCantidad.setText("CANTIDAD :"+model.getCantidad());
+                    holder.productoDesc.setText(model.getDescripcion());
+                    holder.productoPrecio.setText("$ :"+model.getPrecioven());
+                    Picasso.get().load(model.getImagen()).into(holder.prodImg);
+
+                    holder.prodImg.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Principal.this, ProductoDetallesActivity.class);
+                            intent.putExtra("pid",model.getPid());
+                            startActivity(intent);
+                        }
+                    });
+                }
+
+                @NonNull
+                @Override
+                public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                    // Resto del código para crear el ViewHolder
+                    View view =LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.inventario_item,viewGroup, false);
+                    ProductoViewHolder holder = new ProductoViewHolder(view);
+                    return holder;
+                }
+            };
+
+            recyclermenu.setAdapter(adapter);
+            adapter.startListening();
         }
-
-
-        FirebaseRecyclerOptions<Productos> options = new FirebaseRecyclerOptions
-                .Builder<Productos>().setQuery(ProductosRef,Productos.class).build();
-
-        FirebaseRecyclerAdapter<Productos,ProductoViewHolder> adapter = new FirebaseRecyclerAdapter<Productos, ProductoViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull ProductoViewHolder holder, int position, @NonNull Productos model) {
-              holder.productoNom.setText(model.getNombre().toUpperCase());
-              holder.productoCantidad.setText("CANTIDAD :"+model.getCantidad());
-              holder.productoDesc.setText(model.getDescripcion());
-              holder.productoPrecio.setText("$ :"+model.getPrecioven());
-                Picasso.get().load(model.getImagen()).into(holder.prodImg);
-
-                holder.prodImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Principal.this, ProductoDetallesActivity.class);
-                        intent.putExtra("pid",model.getPid());
-                        startActivity(intent);
-                    }
-                });
-
-            }
-
-            @NonNull
-            @Override
-            public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-                View view =LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.inventario_item,viewGroup, false);
-                ProductoViewHolder holder = new ProductoViewHolder(view);
-                return holder;
-            }
-        };
-     recyclermenu.setAdapter(adapter);
-     adapter.startListening();
     }
 
     @Override
