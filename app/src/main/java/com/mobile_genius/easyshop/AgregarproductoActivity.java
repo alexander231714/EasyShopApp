@@ -83,10 +83,9 @@ public class AgregarproductoActivity extends AppCompatActivity {
 
 
     private void AbrirGaleria() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/");
-        startActivityForResult(intent,Gallery_Pick );
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, Gallery_Pick);
     }
 
     @Override
