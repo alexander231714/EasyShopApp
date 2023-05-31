@@ -80,31 +80,7 @@
             android:visibility="gone"
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/opciones_ingreso"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/btnFacebookAdmin"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:backgroundTint="#3F51B5"
-            android:text="@string/iniciar_con_facebook"
-            />
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/btnGoogleAdmin"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:backgroundTint="#FB5447"
-            android:text="@string/iniciar_con_google"
-            />
+
 
     </LinearLayout>
 
