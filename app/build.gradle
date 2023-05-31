@@ -46,5 +46,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "com.theartofdev.edmodo:android-image-cropper:2.8.0"
-    implementation 'com.firebaseui:firebase-ui-database:7.1.1'
+    implementation 'com.firebaseui:firebase-ui-database:6.0.2'
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
 }

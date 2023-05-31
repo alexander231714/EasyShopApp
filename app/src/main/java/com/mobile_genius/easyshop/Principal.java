@@ -1,13 +1,5 @@
 package com.mobile_genius.easyshop;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,8 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +35,6 @@ import com.mobile_genius.easyshop.modal.Productos;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.internal.cache.DiskLruCache;
 
 
 public class Principal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,7 +71,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
         botonFlotante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Principal.this,Carrito.class);
+                Intent intent = new Intent(Principal.this, CarritoActivity.class);
                 startActivity(intent);
             }
         });
@@ -124,6 +124,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
             VerificarUsuarioExistente();
         }
 
+
         FirebaseRecyclerOptions<Productos> options = new FirebaseRecyclerOptions
                 .Builder<Productos>().setQuery(ProductosRef,Productos.class).build();
 
@@ -139,7 +140,7 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                 holder.prodImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Principal.this, Carrito.class);
+                        Intent intent = new Intent(Principal.this, ProductoDetallesActivity.class);
                         intent.putExtra("pid",model.getPid());
                         startActivity(intent);
                     }
