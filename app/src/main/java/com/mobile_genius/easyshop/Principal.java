@@ -141,10 +141,10 @@ public class Principal extends AppCompatActivity implements NavigationView.OnNav
                     // Resto del código para vincular los datos con los elementos de la vista
                     holder.productoNom.setText(model.getNombre().toUpperCase());
                     //Arreglar
-                    holder.productoCantidad.setText(model.getCantidad());
+                    holder.productoCantidad.setText("CANTIDAD" + model.getCantidad());
                     holder.productoDesc.setText(model.getDescripcion());
                     //Arreglar
-                    holder.productoPrecio.setText(model.getPrecioven());
+                    holder.productoPrecio.setText("$:" + model.getPrecioven());
                     Picasso.get().load(model.getImagen()).into(holder.prodImg);
 
                     holder.prodImg.setOnClickListener(new View.OnClickListener() {
